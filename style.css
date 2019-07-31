@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700|Roboto:100,300i,400,500,700&display=swap');
+
+body {
+  margin: 0px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.welcome {
+  height: 100vh;
+  background: url(./assets/fundo.png) center/cover;
+  position: relative;
+  background-position-x: right;
+  background-position-y: top;
+  background-size: calc(100% - 10px);
+  background-repeat: no-repeat;
+}
+
+.textLeft {
+  position: absolute;
+  left: calc(10% - 10px);
+  top: 30%;
+  width: 50%;
+  color: #31224E;
+}
+
+.textLeft h1 {
+  font-size: 50pt;
+  font-weight: 300;
+  margin: 0px
+}
+
+.boldText {
+  font-weight: 700 !important;
+}
+
+.textLeft p {
+  text-align: justify;
+  -ms-text-align-last: left;
+  text-align-last: left;
+  width: calc(60% + 20px);
+  margin-bottom: 40px;
+}
+
+.fita {
+  background: #31224E;
+  height: 10px;
+  width: calc(20% - 5px);
+  border-radius: 10px;
+  margin: 40px 0px;
+}
+
+/* PORTFÓLIO */
+.portfolio {
+  padding-top: 100px;
+  height: 97vh;
+  width: 100%;
+  background: #F6F4F6;
+}
+
+.title-section {
+  background-color: #31224E;
+  height: 106px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px 155px 155px 0px;
+  color: #FFF;
+  font-size: 18pt;
+}
+
+.card-area {
+  display: block;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-wide {
+  background-image: -webkit-linear-gradient(right, #FFF, #FFF 55%, #43e97b 50%, #38f9d7);
+  background-image: -o-linear-gradient(right, #FFF, #FFF 55%, #43e97b 50%, #38f9d7);
+  background-image: linear-gradient(to left, #FFF, #FFF 55%, #43e97b 50%, #38f9d7);
+  ;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+  transition: all .25s ease-in;
+  color: #7F6BA7;
+  box-shadow: 0px 10px 40px #121b4629;
+  width: 60%;
+  height: 160px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: 50px 0px;
+  transition: .5s;
+  position: relative;
+  text-decoration: none;
+}
+
+.previewCard {
+  width: 305px;
+  height: 160px;
+  float: right;
+  position: absolute;
+  right: 0;
+  border-radius: 0px 20px 20px 0px;
+}
+
+#chemistry {
+  background-image: -webkit-linear-gradient(right, #FFF, #FFF 55%, #667eea 50%, #764ba2);
+  background-image: -o-linear-gradient(right, #FFF, #FFF 55%, #667eea 50%, #764ba2);
+  background-image: linear-gradient(to left, #FFF, #FFF 55%, #667eea 50%, #764ba2);
+  ;
+}
+
+#soulsbuild {
+  background-image: -webkit-linear-gradient(right, #FFF, #FFF 55%, #8ec5fc 50%, #e0c3fc);
+  background-image: -o-linear-gradient(right, #FFF, #FFF 55%, #8ec5fc 50%, #e0c3fc);
+  background-image: linear-gradient(to left, #FFF, #FFF 55%, #8ec5fc 50%, #e0c3fc);
+  ;
+}
+
+#eimedico:hover {
+  color: white;
+  text-shadow: 0px 2px 6px #000000;
+  background-position: 0 0;
+}
+
+#chemistry:hover {
+  color: white;
+  text-shadow: 0px 2px 6px #000000;
+  background-position: 0 0;
+}
+
+#soulsbuild:hover {
+  color: white;
+  text-shadow: 0px 2px 6px #000000;
+  background-position: 0 0;
+}
+
+#prevEimedico, #prevChemistry, #prevSoulsbuild, #prevCoup {
+  transition: .5s;
+  opacity: 0;
+  background-position: 306px;
+  background-repeat: no-repeat;
+}
+
+#prevEimedico {
+  background: url("./assets/eimedico.png") center/cover;
+  background-repeat: no-repeat;
+}
+
+#prevChemistry {
+  background: url("./assets/chemistry.png") center/cover;
+  background-repeat: no-repeat;
+}
+
+#prevSoulsbuild {
+  background: url("./assets/soulsbuild.png") center/cover;
+  background-repeat: no-repeat;
+}
+
+#prevCoup {
+  background: url("./assets/soulsbuild.png") center/cover;
+  background-repeat: no-repeat;
+}
+
+.card-wide h1 {
+  font-size: 30pt;
+  margin-left: 50px;
+  font-weight: 300;
+}
+
+.btn-standard {
+  background: #31224E;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 100px;
+  box-shadow: 0px 18px 40px -12px rgb(49, 34, 78);
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.design {
+  display: flex;
+  justify-content: center;
+  height: 81vh;
+}
+
+.design-shell {
+  background-color: #31224E;
+  border-radius: 30px;
+  box-shadow: 0px 10px 40px #121b4666;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 70%;
+  height: 80vh;
+  position: relative;
+  margin-top: -70px;
+  padding-top: 75px;
+}
+
+.design-tile {
+  position: absolute;
+  left: 0;
+  top: 45px;
+  background: #FFF;
+  color: #31224E;
+  width: 360px;
+}
+
+.card {
+  border-radius: 20px;
+  width: 450px;
+  height: 250px;
+  box-shadow: 0px 10px 40px #121b4629;
+  margin: 20px;
+}
+
+#card1 {
+  background: url("./assets/The-last-Of-Us-2-arte.png") center/cover;
+}
+
+#card2 {
+  background: url("./assets/Wallpaper-instinct.png") center/cover;
+}
+
+#card3 {
+  background: url("./assets/Wallpaper-Planets.png") center/cover;
+}
+
+#card4 {
+  background: url("./assets/Wallpaper-Stranger-Things.png") center/cover;
+}
+
+.text-left-about{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-left-about h1{
+  color: #31224E;
+  margin: 0px;
+}
+
+.final-design {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1400px) {
+  .design {
+    height: auto;
+    padding: 40px;
+  }
+
+  .design-shell {
+    height: auto;
+    width: calc(90% + 80px);
+    padding-top: 185px;
+    padding-bottom: 40px;
+  }
+}
+
+.eimedico-portfolio{
+  background: url("./assets/eimedico-portfolio.png");
+  background-position: top;
+  height: 1005vh;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+
+.chemistry-portfolio{
+  background: url("./assets/chemistry-portfolio.png");
+  background-position: top;
+  height: 680vh;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 768px) {
+  .textLeft h1 {
+    font-size: 40pt;
+  }
+  .design-shell {
+    height: auto;
+    padding-top: 185px;
+    padding-bottom: 40px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .textLeft h1 {
+    font-size: 32pt;
+    width: 50%;
+  }
+
+  .textLeft {
+    width: 90%;
+    top: 20%;
+  }
+
+  .portfolio {
+    height: auto;
+    padding: 90px 0px;
+    margin: 20px 0px;
+  }
+
+  .card-wide {
+    width: 90%
+  }
+
+  .welcome {
+    background-size: 615px;
+    background-repeat: no-repeat;
+    background-position-y: top;
+    background-position-x: -180px;
+  }
+
+  .design-tile {
+    width: 240px;
+    font-size: 12pt;
+    height: 80px;
+  }
+  .design-shell{
+    margin-top: -110px;
+  }
+  .card {
+    height: 165px;
+  }
+}

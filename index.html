@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Marcosuel Filho</title>
+</head>
+
+<body>
+  <section class="welcome">
+    <div class="textLeft">
+      <h1>
+        Hi, i'm <span class="boldText">Marcosuel</span>
+      </h1>
+      <div class="fita"></div>
+      <p>
+        Computer science student at the Federal University of Rio
+        Grande do Norte (UFRN). I like photos, games and movies.
+        I love to program and pass my knowledge forward.
+      </p>
+      <a href="#portfolio" class="btn-standard">Portfolio</a>
+      <a href="https://github.com/lexmarcos" class="btn-standard">github</a>
+    </div>
+  </section>
+  <section class="portfolio" id="portfolio">
+    <div class="title-section">
+      <h1>PORTFOLIO</h1>
+    </div>
+    <div class="card-area">
+      <center>
+        <a href="eimedico.html" class="card-wide" id="eimedico" onmouseover="opacityPreview('prevEimedico')" onmouseout="leavePreview('prevEimedico')">
+          <h1>EI MÉDICO!</h1>
+          <div class="previewCard" id="prevEimedico"></div>
+        </a>
+        <a href="chemistry.html" class="card-wide" id="chemistry" onmouseover="opacityPreview('prevChemistry')" onmouseout="leavePreview('prevChemistry')">
+          <h1>CHEMISTRY INSIGHT</h1>
+          <div class="previewCard" id="prevChemistry"></div>
+        </a>
+        <a href="https://soulsbuild.web.app/" class="card-wide" id="soulsbuild" onmouseover="opacityPreview('prevSoulsbuild')" onmouseout="leavePreview('prevSoulsbuild')">
+          <h1>SOULS BUILD</h1>
+          <div class="previewCard" id="prevSoulsbuild"></div>
+        </a>
+      </center>
+    </div>
+  </section>
+  <section class="design">
+    <div class="design-shell">
+      <div class="title-section design-tile">
+        <h1>
+          GRAPHIC DESIGN</h1>
+      </div>
+      <div class="card" id="card1"></div>
+      <div class="card" id="card2"></div>
+      <div class="card" id="card3"></div>
+      <div class="card" id="card4"></div>
+    </div>
+
+  </section>
+  <div class="final-design">
+    <a href="https://drive.google.com/open?id=0B9C9-ZmF33aFb2Z2b0V1VFZZTGM" class="btn-standard">ALL ARTS</a>
+  </div>
+  <script type="text/javascript" src="./index.js"></script>
+</body>
+
+</html>

@@ -7,7 +7,7 @@ body {
 
 .welcome {
   height: 100vh;
-  background: url(./assets/fundo.png) center/cover;
+  background: url('./assets/Fundo.png') center/cover;
   position: relative;
   background-position-x: right;
   background-position-y: top;

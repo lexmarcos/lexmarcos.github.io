@@ -1,0 +1,13 @@
+
+
+@media only screen and (max-width: 768px) {
+  .eimedico-portfolio {
+    height: 865vh;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .eimedico-portfolio {
+    height: 465vh;
+  }
+}

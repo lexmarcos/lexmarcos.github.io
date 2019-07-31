@@ -242,25 +242,52 @@ body {
   background: url("./assets/Wallpaper-Stranger-Things.png") center/cover;
 }
 
-.text-left-about{
+.text-left-about {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.text-left-about h1{
+.text-left-about h1 {
   color: #31224E;
   margin: 0px;
 }
 
 .final-design {
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media only screen and (max-width: 1400px) {
+.eimedico-portfolio {
+  background: url("./assets/eimedico-portfolio.png");
+  background-position: top;
+  height: 1005vh;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+
+.chemistry-portfolio {
+  background: url("./assets/chemistry-portfolio.png");
+  background-position: top;
+  height: 680vh;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 1440px) {
+  .chemistry-portfolio {
+    height: 740vh;
+  }
+
+  .eimedico-portfolio {
+    height: 1109vh;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 1400px) {
   .design {
     height: auto;
     padding: 40px;
@@ -274,34 +301,33 @@ body {
   }
 }
 
-.eimedico-portfolio{
-  background: url("./assets/eimedico-portfolio.png");
-  background-position: top;
-  height: 1005vh;
-  width: 100%;
-  background-repeat: no-repeat;
+@media screen and (max-width: 1024px) {
+  .chemistry-portfolio {
+    height: 740vh;
+  }
 }
 
-.chemistry-portfolio{
-  background: url("./assets/chemistry-portfolio.png");
-  background-position: top;
-  height: 680vh;
-  width: 100%;
-  background-repeat: no-repeat;
-}
-
-@media only screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .textLeft h1 {
     font-size: 40pt;
   }
+
   .design-shell {
     height: auto;
     padding-top: 185px;
     padding-bottom: 40px;
   }
+
+  .eimedico-portfolio {
+    height: 865vh;
+  }
+  .chemistry-portfolio{
+    height: 603vh;
+    background-size: cover;
+  }
 }
 
-@media only screen and (max-width: 425px) {
+@media screen and (max-width: 425px) {
   .textLeft h1 {
     font-size: 32pt;
     width: 50%;
@@ -334,10 +360,19 @@ body {
     font-size: 12pt;
     height: 80px;
   }
-  .design-shell{
+
+  .design-shell {
     margin-top: -110px;
   }
+
   .card {
     height: 165px;
   }
+
+  .eimedico-portfolio {
+    height: 465vh;
+  }
+  .chemistry-portfolio {
+    height: 395vh;
+}
 }

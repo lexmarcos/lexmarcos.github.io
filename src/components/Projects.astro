@@ -1,0 +1,206 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { projects } from '../data/profile';
+---
+
+<section class="projects" aria-labelledby="projects-title">
+  <h2 id="projects-title" class="label">Projetos</h2>
+  <ul class="grid">
+    {
+      projects.map((project, index) => (
+        <li>
+          <a class="project" href={project.href} target="_blank" rel="noopener">
+            <span class="window">
+              <span class="titlebar">
+                <span class="titlebar__name">
+                  <Icon class="titlebar__icon" name={project.icon} aria-hidden="true" />
+                  <span class="titlebar__domain">{project.domain}</span>
+                </span>
+                <span class="titlebar__go">
+                  <Icon name="solar:arrow-right-up-linear" aria-hidden="true" />
+                </span>
+              </span>
+              <Image
+                class="shot"
+                src={project.shot}
+                alt={`Tela inicial do ${project.domain}`}
+                widths={[480, 720, 960, 1440, 1920]}
+                sizes="(min-width: 1024px) 25vw, (min-width: 40rem) 50vw, 100vw"
+                loading={index < 2 ? 'eager' : 'lazy'}
+              />
+            </span>
+            <span class="project__desc">{project.description}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--s-7) var(--s-6);
+  }
+
+  .project {
+    display: grid;
+    gap: var(--s-3);
+  }
+
+  /*
+   * Janela 1-bit. Em repouso a barra de título é lisa, como uma janela
+   * inativa. No hover ela ganha as listras de janela ativa e o print ganha cor.
+   */
+  .window {
+    display: block;
+    border: var(--line) solid var(--ink);
+    background: var(--paper);
+    transition: transform var(--dur-press) var(--ease-out);
+  }
+
+  .titlebar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-2);
+    height: 2.5rem;
+    padding: 0 var(--s-2);
+    border-bottom: var(--line) solid var(--ink);
+  }
+
+  .titlebar::before {
+    content: '';
+    position: absolute;
+    inset: 0.5rem 0.375rem;
+    background: repeating-linear-gradient(var(--ink) 0 0.125rem, transparent 0.125rem 0.25rem);
+    opacity: 0;
+    transition: opacity var(--dur-hover) var(--ease-out);
+  }
+
+  .titlebar__name,
+  .titlebar__go {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    height: 100%;
+    padding: 0 var(--s-2);
+    background: var(--paper);
+  }
+
+  .titlebar__name {
+    min-width: 0;
+  }
+
+  .titlebar__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: none;
+  }
+
+  .titlebar__domain {
+    overflow: hidden;
+    font-size: var(--t-xl);
+    font-weight: var(--w-strong);
+    font-stretch: var(--wd-title);
+    letter-spacing: -0.015em;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .titlebar__go svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 320ms var(--ease-out);
+  }
+
+  .shot {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top;
+    transition: filter 320ms var(--ease-out);
+  }
+
+  /* Só quem tem hover vê o print em cinza; no toque ele já aparece colorido */
+  @media (hover: hover) {
+    .shot {
+      filter: grayscale(1) contrast(1.08);
+    }
+  }
+
+  .project__desc {
+    max-width: 40ch;
+    text-wrap: pretty;
+  }
+
+  @media (hover: hover) {
+    .project:hover .titlebar::before {
+      opacity: 1;
+    }
+
+    .project:hover .shot {
+      filter: none;
+    }
+
+    .project:hover .titlebar__go svg {
+      transform: translate(0.1875rem, -0.1875rem);
+    }
+  }
+
+  .project:focus-visible {
+    outline: none;
+  }
+
+  .project:focus-visible .window {
+    outline: var(--line) solid var(--ink);
+    outline-offset: 0.25rem;
+  }
+
+  .project:focus-visible .titlebar::before {
+    opacity: 1;
+  }
+
+  .project:focus-visible .shot {
+    filter: none;
+  }
+
+  /* Resposta no toque, não na soltura */
+  .project:active .window {
+    transform: scale(0.985);
+  }
+
+  @media (min-width: 40rem) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) and (orientation: landscape) {
+    .grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--column-gap);
+    }
+
+    .titlebar {
+      height: 2.25rem;
+    }
+
+    .titlebar__domain {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .titlebar__go svg,
+    .window {
+      transition: none;
+    }
+  }
+</style>

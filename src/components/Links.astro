@@ -1,0 +1,115 @@
+---
+import { Icon } from 'astro-icon/components';
+import { github, socials } from '../data/profile';
+---
+
+<nav class="links" aria-label="Redes sociais">
+  <a class="pill pill--primary" href={github.href} target="_blank" rel="noopener me">
+    <Icon name={github.icon} aria-hidden="true" />
+    <span>Ver meu GitHub</span>
+  </a>
+  <div class="secondary">
+    {
+      socials.map((social) => (
+        <a class="pill" href={social.href} target="_blank" rel="noopener me">
+          <Icon name={social.icon} aria-hidden="true" />
+          <span>{social.label}</span>
+        </a>
+      ))
+    }
+  </div>
+</nav>
+
+<style>
+  .links {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .secondary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-2);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-2);
+    min-height: 2.75rem;
+    padding: 0 var(--s-2);
+    border: var(--line) solid var(--ink);
+    border-radius: var(--r-pill);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 0.875rem;
+    font-weight: var(--w-label);
+    line-height: 1;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color var(--dur-hover) var(--ease-out),
+      color var(--dur-hover) var(--ease-out),
+      transform var(--dur-press) var(--ease-out);
+  }
+
+  .pill svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex: none;
+  }
+
+  .pill--primary {
+    min-height: 3.25rem;
+    padding: 0 var(--s-6);
+    background: var(--ink);
+    color: var(--paper);
+    font-size: var(--t-lg);
+  }
+
+  .pill--primary svg {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+
+  @media (hover: hover) {
+    .pill:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .pill--primary:hover {
+      background: var(--paper);
+      color: var(--ink);
+    }
+  }
+
+  /* Resposta no toque, não na soltura */
+  .pill:active {
+    transform: scale(0.97);
+  }
+
+  @media (min-width: 30rem) {
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .secondary {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      padding: 0 var(--s-4);
+      font-size: var(--t-md);
+    }
+
+    .pill--primary {
+      padding: 0 var(--s-6);
+      font-size: var(--t-lg);
+    }
+  }
+</style>

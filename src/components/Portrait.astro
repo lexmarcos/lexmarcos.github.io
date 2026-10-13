@@ -1,0 +1,179 @@
+---
+import { profile } from '../data/profile';
+---
+
+<figure class="stage" data-stage>
+  <div class="box" aria-hidden="true"></div>
+  <img
+    class="portrait"
+    data-portrait
+    src="/markzuel.svg"
+    width="1009"
+    height="1096"
+    alt={`Ilustração de ${profile.name.join(' ')} saindo de uma caixa`}
+    draggable="false"
+    fetchpriority="high"
+  />
+</figure>
+
+<style>
+  /*
+   * A caixa ocupa a base do palco. O retrato fica por cima dela, apoiado no
+   * fundo, e a cabeça passa da borda superior. O clip corta só o que fica
+   * abaixo do chão, então o retrato pode "voltar para dentro" da caixa.
+   */
+  .stage {
+    /* altura do palco = altura do retrato (1096 / 1009 da largura) */
+    --portrait-w: 78%;
+    --box-h: 34%;
+
+    position: relative;
+    aspect-ratio: 1 / 0.847;
+    width: 100%;
+    clip-path: inset(-100vmax -100vmax 0 -100vmax);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  @media (min-width: 1024px) and (orientation: landscape) {
+    .stage {
+      --portrait-w: 88%;
+      aspect-ratio: 1 / 0.956;
+    }
+  }
+
+  .box {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: var(--box-h);
+    border: var(--line) solid var(--ink);
+    background: var(--paper) var(--dither);
+  }
+
+  .portrait {
+    position: absolute;
+    bottom: 0;
+    left: calc((100% - var(--portrait-w)) / 2);
+    width: var(--portrait-w);
+    height: auto;
+    cursor: grab;
+    /* Rolagem vertical continua livre no toque; o arrasto lateral move o retrato. */
+    touch-action: pan-y;
+    will-change: translate;
+    animation: rise 700ms 150ms both
+      linear(0, 0.039 3.6%, 0.126 7.1%, 0.237 10.7%, 0.356 14.3%, 0.477 17.9%, 0.583 21.4%, 0.676 25%, 0.756 28.6%, 0.821 32.1%, 0.873 35.7%, 0.914 39.3%, 0.945 42.9%, 0.968 46.4%, 0.985 50%, 0.996 53.6%, 1.003 57.1%, 1.008 60.7%, 1.01 64.3%, 1.01 71.4%, 1.008 78.6%, 1.006 85.7%, 1.004 92.9%, 1);
+  }
+
+  .portrait:active,
+  .stage[data-dragging] .portrait {
+    cursor: grabbing;
+  }
+
+  @keyframes rise {
+    from {
+      transform: translateY(62%);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .portrait {
+      animation: none;
+      cursor: default;
+    }
+  }
+</style>
+
+<script>
+  /*
+   * Arrastar o retrato. Rastreio 1:1 respeitando o ponto de pega, elástico
+   * progressivo e retorno com mola que herda a velocidade do gesto. X e Y
+   * são molas independentes.
+   */
+  const stage = document.querySelector<HTMLElement>('[data-stage]');
+  const portrait = document.querySelector<HTMLImageElement>('[data-portrait]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (stage && portrait) {
+    const DAMPING = 0.75;
+    const RESPONSE = 0.45;
+    const stiffness = (2 * Math.PI / RESPONSE) ** 2;
+    const friction = (4 * Math.PI * DAMPING) / RESPONSE;
+
+    const rubberband = (offset: number, dimension: number, constant = 0.55) =>
+      (offset * dimension * constant) / (dimension + constant * Math.abs(offset));
+
+    let x = 0;
+    let y = 0;
+    let vx = 0;
+    let vy = 0;
+    let raf = 0;
+    let pointerId: number | null = null;
+    let grabX = 0;
+    let grabY = 0;
+    let history: { x: number; y: number; t: number }[] = [];
+
+    const render = () => {
+      portrait.style.translate = `${x}px ${y}px`;
+    };
+
+    const step = (last: number) => (now: number) => {
+      const dt = Math.min((now - last) / 1000, 1 / 30);
+      vx += (-stiffness * x - friction * vx) * dt;
+      vy += (-stiffness * y - friction * vy) * dt;
+      x += vx * dt;
+      y += vy * dt;
+      render();
+      const settled = Math.abs(x) < 0.1 && Math.abs(y) < 0.1 && Math.abs(vx) < 1 && Math.abs(vy) < 1;
+      if (settled) {
+        x = y = vx = vy = 0;
+        render();
+        raf = 0;
+        return;
+      }
+      raf = requestAnimationFrame(step(now));
+    };
+
+    portrait.addEventListener('pointerdown', (event) => {
+      if (reduceMotion.matches || event.button !== 0) return;
+      cancelAnimationFrame(raf);
+      raf = 0;
+      pointerId = event.pointerId;
+      portrait.setPointerCapture(pointerId);
+      portrait.getAnimations().forEach((animation) => animation.finish());
+      // Começa do valor que está na tela, não do alvo.
+      grabX = event.clientX - x;
+      grabY = event.clientY - y;
+      history = [{ x: event.clientX, y: event.clientY, t: event.timeStamp }];
+      stage.dataset.dragging = '';
+    });
+
+    portrait.addEventListener('pointermove', (event) => {
+      if (event.pointerId !== pointerId) return;
+      const size = portrait.getBoundingClientRect();
+      x = rubberband(event.clientX - grabX, size.width);
+      y = rubberband(event.clientY - grabY, size.height);
+      history.push({ x: event.clientX, y: event.clientY, t: event.timeStamp });
+      if (history.length > 6) history.shift();
+      render();
+    });
+
+    const release = (event: PointerEvent) => {
+      if (event.pointerId !== pointerId) return;
+      pointerId = null;
+      delete stage.dataset.dragging;
+      const first = history[0];
+      const last = history[history.length - 1];
+      const elapsed = (last.t - first.t) / 1000;
+      // A velocidade do dedo passa pelo elástico antes de virar velocidade da mola.
+      vx = elapsed > 0 ? ((last.x - first.x) / elapsed) * 0.35 : 0;
+      vy = elapsed > 0 ? ((last.y - first.y) / elapsed) * 0.35 : 0;
+      raf = requestAnimationFrame(step(performance.now()));
+    };
+
+    portrait.addEventListener('pointerup', release);
+    portrait.addEventListener('pointercancel', release);
+  }
+</script>

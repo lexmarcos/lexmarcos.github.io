@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro';
+import Portrait from '../components/Portrait.astro';
+import Links from '../components/Links.astro';
+import Projects from '../components/Projects.astro';
+import Credentials from '../components/Credentials.astro';
+import { profile } from '../data/profile';
+---
+
+<Base
+  title={`${profile.name.join(' ')}, engenheiro de software`}
+  description="Engenheiro de software há 8 anos. Criador do Brasil Gráficos, Keyball, 8disc e Telinha."
+>
+  <div class="page">
+    <main class="main">
+      <header class="hero">
+        <div class="portrait-col">
+          <Portrait />
+        </div>
+
+        <h1 class="name">
+          {profile.name.map((part) => <span>{part}</span>)}
+        </h1>
+
+        <div class="intro">
+          <p class="bio">{profile.bio}</p>
+          <Links />
+        </div>
+      </header>
+
+      <div class="projects-col">
+        <Projects />
+      </div>
+    </main>
+
+    <Credentials />
+  </div>
+</Base>
+
+<style>
+  /* Mobile primeiro: uma coluna, alinhada à esquerda, página rola */
+  .page {
+    --ground-gap: var(--s-7);
+    --column-gap: var(--s-6);
+
+    display: grid;
+    gap: var(--s-9);
+    padding: var(--s-8) var(--gutter);
+    padding-inline: max(var(--gutter), env(safe-area-inset-left));
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+
+  .main {
+    display: grid;
+  }
+
+  .hero {
+    display: grid;
+    gap: var(--s-6);
+    padding-bottom: var(--s-8);
+  }
+
+  /* acima do texto, para o retrato arrastado passar por cima */
+  .portrait-col {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 22rem);
+    margin-bottom: var(--s-2);
+  }
+
+  .name {
+    display: grid;
+    font-size: clamp(3.5rem, 19vw, 6rem);
+    font-weight: var(--w-display);
+    font-stretch: var(--wd-display);
+    letter-spacing: -0.02em;
+    line-height: 0.86;
+  }
+
+  .intro {
+    display: grid;
+    gap: var(--s-6);
+  }
+
+  .bio {
+    max-width: 36ch;
+    font-size: var(--t-lg);
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+    text-wrap: pretty;
+  }
+
+  /* A linha do chão: a caixa do retrato pousa sobre ela, os projetos começam nela */
+  .projects-col {
+    padding-top: var(--ground-gap);
+    border-top: var(--line) solid var(--ink);
+  }
+
+  /*
+   * Notebook e desktop: tudo em uma tela, sem rolagem. Faixa de apresentação
+   * em cima, os quatro projetos lado a lado como protagonistas, credenciais
+   * no rodapé.
+   */
+  @media (min-width: 1024px) and (orientation: landscape) {
+    .page {
+      --ground-gap: var(--s-6);
+      --columns: repeat(4, minmax(0, 1fr));
+      --column-gap: var(--s-7);
+
+      max-width: none;
+      min-height: 100vh;
+      min-height: 100dvh;
+      align-content: center;
+      gap: var(--s-7);
+      padding: var(--s-7) var(--s-10);
+    }
+
+    .hero {
+      grid-template-columns: 17rem minmax(0, 1fr) 30rem;
+      align-items: end;
+      column-gap: var(--s-9);
+      padding-bottom: 0;
+    }
+
+    .portrait-col {
+      width: 100%;
+      margin-bottom: calc(var(--line) * -1);
+    }
+
+    .name,
+    .intro {
+      padding-bottom: var(--s-7);
+    }
+
+    .name {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 0.18em;
+      font-size: 7.25rem;
+    }
+
+    .intro {
+      gap: var(--s-5);
+    }
+
+    .bio {
+      font-size: var(--t-md);
+      line-height: 1.45;
+    }
+  }
+</style>

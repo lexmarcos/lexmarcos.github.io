@@ -4,6 +4,6 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://lexmarcos.github.io',
+  site: 'https://markzuel.com',
   integrations: [icon()],
 });

@@ -1,0 +1,51 @@
+/* Design system 1-bit. Ver DESIGN.md. */
+@import '@fontsource-variable/archivo/wdth.css';
+
+:root {
+  /* Cor: duas e só duas */
+  --ink: #000000;
+  --paper: #ffffff;
+
+  /* Retícula de 1 bit para o interior da caixa */
+  --dither: radial-gradient(circle at 50% 50%, var(--ink) 0.075rem, transparent 0.09rem) 0 0 / 0.5rem 0.5rem;
+
+  /* Tipografia */
+  --font: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+
+  --t-xl: 1.75rem;
+  --t-lg: 1.1875rem;
+  --t-md: 1rem;
+  --t-sm: 0.875rem;
+
+  --w-display: 850;
+  --w-strong: 750;
+  --w-label: 560;
+  --w-body: 420;
+
+  --wd-display: 68%;
+  --wd-title: 80%;
+  --wd-body: 100%;
+
+  /* Espaço, base 4px em rem */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.25rem;
+  --s-6: 1.5rem;
+  --s-7: 2rem;
+  --s-8: 2.5rem;
+  --s-9: 3rem;
+  --s-10: 4rem;
+
+  --gutter: 1rem;
+
+  /* Traço e raio */
+  --line: 0.125rem;
+  --r-pill: 999rem;
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-press: 100ms;
+  --dur-hover: 160ms;
+}

@@ -87,6 +87,8 @@ import { profile } from '../data/profile';
 </style>
 
 <script>
+  import { track } from '../scripts/track';
+
   /*
    * Arrastar o retrato. Rastreio 1:1 respeitando o ponto de pega, elástico
    * progressivo e retorno com mola que herda a velocidade do gesto. X e Y
@@ -114,6 +116,8 @@ import { profile } from '../data/profile';
     let grabX = 0;
     let grabY = 0;
     let history: { x: number; y: number; t: number }[] = [];
+    // Só o primeiro arrasto de verdade por visita vira evento, para manter o volume baixo.
+    let tracked = false;
 
     const render = () => {
       portrait.style.translate = `${x}px ${y}px`;
@@ -158,6 +162,11 @@ import { profile } from '../data/profile';
       history.push({ x: event.clientX, y: event.clientY, t: event.timeStamp });
       if (history.length > 6) history.shift();
       render();
+      // Um toque sem movimento não conta; o limite ignora tremor do dedo.
+      if (!tracked && Math.hypot(x, y) > 8) {
+        tracked = true;
+        track('portrait_drag', { engagement_type: 'drag' });
+      }
     });
 
     const release = (event: PointerEvent) => {

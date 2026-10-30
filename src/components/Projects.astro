@@ -10,7 +10,15 @@ import { projects } from '../data/profile';
     {
       projects.map((project, index) => (
         <li>
-          <a class="project" href={project.href} target="_blank" rel="noopener">
+          <a
+            class="project"
+            href={project.href}
+            target="_blank"
+            rel="noopener"
+            data-track-type="project"
+            data-track-id={project.domain}
+            data-track-position={index + 1}
+          >
             <span class="window">
               <span class="titlebar">
                 <span class="titlebar__name">

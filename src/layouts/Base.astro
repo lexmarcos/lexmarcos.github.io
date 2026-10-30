@@ -26,8 +26,21 @@ const { title, description } = Astro.props;
     <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" href="/markzuel.svg" as="image" type="image/svg+xml" />
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-N5H3CYGJD7"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-N5H3CYGJD7');
+    </script>
   </head>
   <body>
     <slot />
+    <script>
+      import '../scripts/track';
+    </script>
   </body>
 </html>

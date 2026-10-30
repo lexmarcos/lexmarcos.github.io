@@ -4,14 +4,30 @@ import { github, socials } from '../data/profile';
 ---
 
 <nav class="links" aria-label="Redes sociais">
-  <a class="pill pill--primary" href={github.href} target="_blank" rel="noopener me">
+  <a
+    class="pill pill--primary"
+    href={github.href}
+    target="_blank"
+    rel="noopener me"
+    data-track-type="github"
+    data-track-id="github"
+    data-track-position="1"
+  >
     <Icon name={github.icon} aria-hidden="true" />
     <span>Ver meu GitHub</span>
   </a>
   <div class="secondary">
     {
-      socials.map((social) => (
-        <a class="pill" href={social.href} target="_blank" rel="noopener me">
+      socials.map((social, index) => (
+        <a
+          class="pill"
+          href={social.href}
+          target="_blank"
+          rel="noopener me"
+          data-track-type="social"
+          data-track-id={social.label.toLowerCase()}
+          data-track-position={index + 1}
+        >
           <Icon name={social.icon} aria-hidden="true" />
           <span>{social.label}</span>
         </a>
